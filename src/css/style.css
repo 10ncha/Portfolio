@@ -18,35 +18,12 @@ DESCRIPTION: Main stylesheet containing layout, typography,
  * 7. Media Queries
  */
 
-/* --- Fonts --- */
 /* ------- Font ------- */
-/* -- Thin -- */
-@font-face {
-  font-family: "oldschool-grotesk";
-  src: url("../../fonts/oldschool-grotesk/200.otf") format("opentype");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
 
-/* -- Regular -- */
-@font-face {
-  font-family: "oldschool-grotesk";
-  src: url("../../fonts/oldschool-grotesk/300.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
+/* Space Grotesk */
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
 
-/* -- ExtraBold -- */
-@font-face {
-  font-family: "oldschool-grotesk";
-  src: url("../../fonts/oldschool-grotesk/400.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* Oldschool Grotesk */
 @font-face {
   font-family: "oldschool-grotesk";
   src: url("../../fonts/oldschool-grotesk/500.otf") format("opentype");
@@ -97,6 +74,10 @@ DESCRIPTION: Main stylesheet containing layout, typography,
     "oldschool-grotesk", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
 
+  --font-cabin:
+    "Cabin", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
   /* Type scale (1.25 ratio) */
   --text-sm: 0.5rem;
   --text-base: 1rem;
@@ -110,12 +91,12 @@ DESCRIPTION: Main stylesheet containing layout, typography,
   --leading-normal: 1.6;
 
   /* Colors */
-  --text-green-primary: hsl(71, 100%, 50%);
-  --text-green-secondary: hsla(71, 100%, 50%, 0.655);
-  --text-white-primary: hsl(60, 24%, 94%);
-  --text-white-secondary: hsla(60, 23%, 94%, 0.655);
-  --text-black-primary: hsl(240, 3%, 7%);
-  --text-black-secondary: hsla(240, 3%, 7%, 0.655);
+  --text-green-primary: #d0ff00;
+  --text-green-secondary: #d0ff00a7;
+  --text-white-primary: #f3f3ec;
+  --text-white-secondary: #f3f3eca7;
+  --text-black-primary: #141414;
+  --text-black-secondary: #111112a7;
 }
 
 /* --- 2. Reset & Base Styles --- */
@@ -127,12 +108,14 @@ DESCRIPTION: Main stylesheet containing layout, typography,
 
 html,
 body {
-  height: 100%;
-  width: 100%;
-  background: var(--secondary-bg);
-  font-family: var(--font-oldschool-grotesk);
+  height: 100vh;
+  width: 100vw;
+  background: var(--primary-bg);
+  font-family: var(--font-cabin);
+  font-optical-sizing: auto;
   font-weight: 400;
-  line-height: 1;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 h1,
@@ -151,7 +134,7 @@ h1,
 h2,
 h3,
 p {
-  line-height: 1.5;
+  line-height: 1.2;
   text-rendering: optimizeLegibility;
   overflow-wrap: break-word;
 }
@@ -176,7 +159,6 @@ h3 {
 p {
   font-size: 1rem; /* Body Copy */
   margin-bottom: 1.25rem;
-  color: var(--text-secondary, #444);
 }
 
 ul,
@@ -186,19 +168,7 @@ li {
 
 /* Custom Scrollar */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 4px;
-  /* margin: 40vh 0; */
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-color);
-  border-radius: 4px;
-  height: 2px;
+  display: none;
 }
 
 /* --- 5. Components --- */
@@ -207,3 +177,195 @@ li {
  * Header Navigation
  * Used in the "header-navbar" section.
  */
+header {
+  font-family: var(--font-oldschool-grotesk);
+  max-width: 100%;
+  color: var(--text-black-primary);
+}
+
+h1 {
+  text-transform: uppercase;
+  font-family: var(--font-oldschool-grotesk);
+  font-size: 8rem;
+  font-weight: 600;
+  letter-spacing: -0.1rem;
+  line-height: 0.9;
+}
+
+p,
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  user-select: none;
+}
+
+/* main container */
+.main-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  will-change: transform, opacity;
+  z-index: 0;
+}
+
+section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--text-white-primary);
+  color: var(--text-black-primary);
+  padding: 2rem;
+}
+
+.hero h1 {
+  width: 70%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1rem;
+  color: var(--text-white-primary);
+  display: flex;
+  justify-content: space-between;
+  mix-blend-mode: difference;
+  z-index: 2;
+}
+
+.navbar p {
+  font-size: 0.9rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--primary-bg);
+  color: var(--text-white-primary);
+  z-index: 1;
+  will-change: clip-path;
+}
+
+.menu-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+.menu-content p {
+  font-weight: 900;
+}
+
+.menu-col:nth-child(2) {
+  text-align: right;
+}
+
+.menu-logo {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9.375rem;
+  will-change: transform, opacity;
+}
+
+.menu-links-wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  /* height: max-content; */
+  width: max-content;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.menu-links {
+  position: relative;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.menu-links a {
+  position: relative;
+  color: var(--text-white-primary);
+  font-family: var(--font-oldschool-grotesk);
+  font-size: 10rem;
+  font-weight: 900;
+  letter-spacing: -0.02rem;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.menu-links a span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.link-highlighter {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 400px;
+  height: 0.75rem;
+  background-color: var(--accent-color);
+  will-change: transform, width;
+}
+
+.menu-overlay {
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.char {
+  position: relative;
+  display: inline-block;
+  will-change: transform;
+}
+
+@media (max-width: 1000px) {
+  .hero h1 {
+    width: 100%;
+    font-size: 4rem;
+  }
+
+  .menu-content {
+    top: 25%;
+  }
+
+  .menu-logo,
+  .link-highlighter {
+    display: none;
+  }
+
+  .menu-links-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .menu-link a {
+    font-size: 4rem;
+    letter-spacing: 0;
+  }
+}
