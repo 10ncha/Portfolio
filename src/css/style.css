@@ -285,7 +285,11 @@ section {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 9.375rem;
+  width: max-content;
+  text-align: center;
+  font-family: var(--font-oldschool-grotesk);
+  font-size: 7rem;
+  font-weight: 900;
   will-change: transform, opacity;
 }
 
@@ -316,6 +320,7 @@ section {
   letter-spacing: -0.02rem;
   display: inline-block;
   overflow: hidden;
+  margin-bottom: -0.2em;
 }
 
 .menu-links a span:nth-child(2) {
@@ -334,9 +339,9 @@ section {
   will-change: transform, width;
 }
 
-.menu-overlay {
+/* .menu-overlay {
   clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-}
+} */
 
 .char {
   position: relative;
